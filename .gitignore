@@ -1,0 +1,10 @@
+*.log
+*.dvi
+*.idx
+*.ps
+*.aux
+core
+*.synctex.gz
+auto/
+*.fdb_latexmk
+*.fls

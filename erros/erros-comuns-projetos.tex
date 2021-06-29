@@ -1,0 +1,360 @@
+\newcommand{\video}[2]{\href{#1}{Vídeo: #2}}
+
+
+\chapter{Erros comuns em projetos}
+\label{erros-projetos}
+
+Nesse capítulo estão apresentados os erros mais comuns que os professores observam nos sistemas desenvolvidos nas disciplinas de projetos. Alguns fazem parte de mais de uma categoria, mas foram listados cada um em uma categoria representada pela seção do documento.
+
+São apresentados alguns problemas de projeto / modelagem e outros específicos do desenvolvimento.
+
+Algumas referencias indicadas nesse capítulo são de publicações e vídeos disponíveis na internet que devem ser lidas / assistidos para correta compreensão do contexto.
+
+O formato desse capítulo não segue exatamente o formato de documento indicado para os trabalhos acadêmicos.
+
+\todo[inline]{Colocar aqui os erros mais comuns nos projetos de software das disciplinas}
+
+
+\section{Erros de Processo}
+
+Os processos da aplicação devem ser desenvolvidos de forma que o usuário possa utilizar a aplicação de maneira simples e intuitiva, existem casos onde o processo atual pode ser redefinido e criar ganhos, mas existem casos onde não é possível redefinir o processo real e o sistema deve atender a esse processo.
+
+Muitas vezes o analista e o desenolvedor não se colocam no papel do usuário para verificar se o que estão desenvolvendo faz sentido para quem vai realmente utilizar a aplicação.
+
+\begin{itemize}
+    \item interface que não trata o processo de forma simples para o usuário (somente \gls{crud} e o usuário precisa saber qual sequencia deve utilizar);
+    
+    \item muitas bibliotecas e padrões abertos facilitam o desenvolvimento e simplificam a aplicação, normalmente não existe justificativa para \enquote{reinventar a roda}, ex: 
+      \begin{itemize}
+          \item utilização de \enquote{login social} OAuth;
+
+          \item utilizações de bibliotecas para tratamentos básicos de segurança;
+          
+          \item utilizações de bibliotecas para validações.
+      \end{itemize}
+\end{itemize}
+
+\section{Erros de Segurança}
+
+\begin{itemize}
+    \item implementação de um processo de recuperação de senha que depende de dados públicos : 
+    Caso real que aconteceu com o sistema do ENEM - \citeonline{medicina_cachaca};
+    \todo[inline]{migração para o biblatex para permitir a citação dos títulos}
+    
+    \item utilização de um meio de comunicação que não é seguro para envio de validação em etapa adicional : Caso real de invasão de Telegram a partir da vulnerabilidade da operadora de telefonia \cite{invasao_telegram};
+    
+    \item armazenamento de credenciais de acesso a banco de dados, servidor de e-mail diretamente dentro de arquivos da aplicação e que são colocados no repositório de controle de versão;
+    
+    \item armazenamento de senhas abertas no banco de dados (sem hash).
+\end{itemize}
+
+\section{Erros de modelo de dados}
+
+\begin{itemize}
+    \item Armazenamento de senhas abertas no banco de dados (sem hash);
+    
+    \item erro na definição dos modelos apresentados (físico, conceitual, lógico, DER, MER);
+    
+    \item erro na conversão entre modelos;
+    
+    \item dicionário de dados diferente da modelagem apresentada;
+    
+    \item tipagem de dados incorreta (Ex: um campo para data com tipo varchar);
+    
+    \item falta de índices adicionais em tabelas do banco de dados;
+
+    \item falta de teste do modelo definido;
+    
+    \item exclusão física de dados que deveriam ser mantidos para histórico;
+    
+    \item falta de informações para auditoria de processos;
+    
+    
+    
+\end{itemize}
+
+\section{Erros Interface com Usuário}
+
+\begin{itemize}
+    \item tradução automática de página via google tradutor, que acaba gerando falhas de contexto e traduções sem sentido;
+    
+    \item falta de responsividade em aplicações : web e móvel;
+    
+    \item não utilizar padrões já existentes para plataforma escolhida;
+    
+    \item interface complexa para o nível de conhecimento do público alvo da aplicação
+    \newline
+    \cite{computer_skills}.
+    
+\end{itemize}
+
+\section{Erros de Validação}
+
+\begin{itemize}
+    \item Sistemas de cadastramento que não validam corretamente os dados : falta redigitação de campos importantes como senha;
+    
+    \item não validar corretamente os campos de acordo com definições existentes (ex e-mail deve seguir \citeonline[RFC 5322]{rfc5322});
+    
+    \item falta de validação de e-mail, se o e-mail não for válido o usuário não consegue recuperar a senha (não adianta validar somente o formato, tem que fazer envio com código de validação);
+    
+    \item Limites de senha sem considerar entropia da senha, ex uma senha grande é melhor que uma pequena com diversos tipos de caracteres \autoref{fig:password_strength};
+
+    \item falta de tratamento no backend, fazendo validações e controle de acesso somente no frontend;
+    
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \caption{Boas senhas não devem ser difíceis para o usuário}
+	\includegraphics[width=0.95\textwidth]{erros/password_strength.png}
+    \fonte{\citeonline{fig_password_strength}}
+    \label{fig:password_strength}
+\end{figure}
+
+
+\section{Erros do processo de teste e apresentação}
+
+\begin{itemize}
+
+    \item testar somente os casos de sucesso sem observar as condições de erro;
+    
+    \item volume de dados insuficiente para demonstrar o correto funcionamento da aplicação;
+    
+    \item falta de dados consistentes com o contexto da aplicação (escrever teste em um campo pode dificultar posteriormente a analise dos dados).
+    
+\end{itemize}
+
+\section{Erros de modelagem / análise / projeto}
+
+\begin{itemize}
+    \item Casos de uso que não tratam corretamente as ações de usuários, ex recuperação de senha que tem dois passos (solicitação e redefinição da senha);
+    
+    \item definições de casos de uso ou estórias que não detalham o que deve ser feito 
+    \newline
+    % Instruções exatas como fazer um sanduiche com legendas
+    \video{https://www.youtube.com/watch?v=pdhqwbUWf4U}{Como fazer um sanduíche};
+    
+    \item não analisar corretamente os dados disponíveis para o projeto \cite{boas_perguntas_dados} \cite{guerra-matematica} \cite{ellenberg2015poder} -  \autoref{fig:aviao_wald};
+
+    
+    \item desconsiderar o volume de dados e acessos da aplicação ao escolher a arquitetura.
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \caption{Exemplo da análise de \citeonline{wald1980reprint} nos aviões sobreviventes da Segunda Guerra mundial}
+	\includegraphics[width=0.8\textwidth]{erros/aviao_wald.png}
+    \fonte{\citeonline{fig_aviao_wald}}
+    \label{fig:aviao_wald}
+\end{figure}
+
+
+\section{Erros de planejamento}
+
+\begin{itemize}
+    \item Escolher a metodologia X e não utilizar os itens básicos dessa metodologia no desenvolvimento do projeto;
+    
+    \item escolher XGH como metodologia de desenvolvimento \cite{xgh} \cite{xgh-axioms};
+    
+    \item quem planeja e escolhe a estratégia primeiro tem melhores resultados:
+    \begin{itemize}
+        \item 
+        % Escolha a estratégia correta, corrida sobre tijolos
+        \video{https://www.youtube.com/watch?v=4P-i9gCD09s&list=PL69253D27EBEF273E}{Escolha a estratégia correta};
+        \item
+        % Muito desgate sem planejamento, porquinho buscando cookies sobre geladeira
+        \video{https://www.youtube.com/watch?v=LOyX-vgdQGQ&list=PL69253D27EBEF273E}{Muito desgate sem planejamento};
+    
+        \item % animação : Planejar é Preciso! LEGENDADO
+        \video{https://www.youtube.com/watch?v=utLWFdkRm78&list=PL69253D27EBEF273E}{Planejar é Preciso}.    
+    \end{itemize}
+    
+    \item falta de revisão em documentos, aplicação, vídeos;
+    
+    \item utilizar outras ferramentas e não as obrigatórias das disciplinas, um caso comum é a utilização da ferramenta Postman diretamente (criando a definição manualmente) em vez de utilizar o padrão OpenAPI (swagger) que é obrigatório e que pode ser importado no Postman \cite{postman-openapi};
+    
+    \item deixar para ultima hora, ex. processos como a criação de documentos no latexdiff, apesar de simples de executar, dependem de preparação de ambiente.
+\end{itemize}
+
+
+
+\section{Erros de comunicação}
+
+\begin{itemize}
+    \item Documentar da melhor maneira para garantir que todos entendam da mesma forma o que deve ser desenvolvido, cuidado com o que escreve:
+    \begin{itemize}
+        \item \autoref{fig:balanco};
+        
+        \item \autoref{fig:gabarito-prova};
+        
+        % Como fazer um sanduiche legendado....
+        \item \video{https://www.youtube.com/watch?v=pdhqwbUWf4U&list=PL69253D27EBEF273E}{Como ensinar linguagem de programação para uma criança}.
+    \end{itemize}
+
+    \item não acompanhar o e-mail que recebe notificações do SUAP, moodle;
+    
+    \item não acompanhar o grupo da disciplina (normalmente no Telegram);
+    
+    \item falta de comunicação e negociação com os clientes.
+\end{itemize}
+
+\todo[inline]{Existem inúmeras versões dessa ilustração \autoref{fig:balanco}, aqui foi utilizada uma publicação como referencia para ilustrar a situação}
+
+\begin{figure}
+    \centering
+    \caption{A importância da comunicação correta}
+	\includegraphics[width=0.95\textwidth]{erros/projeto_balanca_na_arvore.jpg}
+    \fonte{\citeonline{engenharia_software_balanca}}
+    \label{fig:balanco}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    \caption{A importância da comunicação correta 2}
+	\includegraphics[width=0.95\textwidth]{erros/erro_de_comunicacao_gabarito_prova.jpg}
+    \legend{Fonte e titulo foram removidos propositalmente}
+    \label{fig:gabarito-prova}
+\end{figure}
+
+
+
+\section{Erros comportamentais}
+
+Muitos insucessos acontecem devido a comportamentos dos participantes dos projetos, o histórico das disciplinas de projetos demonstraram diversos comportamentos individuais (alguns também acontecem com as equipes) que se evitados permitem melhores resultados:
+
+\begin{itemize}
+    \item falta de atenção na leitura dos documentos, regras das disciplinas, mensagens dos professores etc : \autoref{fig:vendo_bolo_cenoura} \cite{atencao_leitura_vendo_bolo_cenoura};
+    
+    \item medo de errar, para tomar as melhores decisões precisamos de experiencia, e experiencias muitas vezes vem de decisões erradas, mas é importante que essas experiencias aconteçam nos momentos corretos, no inicio e não no final dos projetos \cite{decisions_experience-1} \cite{decisions_experience-2} \autoref{fig:lidar_com_falhas};
+
+    \item não entender o conceito de desenvolvimento de projeto em equipe e responsabilidades: 
+    % Diversos videos sobre o trabalho em equipe 
+    % Motivacional - Trabalho em equipe - Juntos fazemos mais e melhor!
+    \video{https://www.youtube.com/watch?v=twg9SCt76UE&list=PL69253D27EBEF273E}{Trabalho em equipe - Juntos fazemos mais e melhor};
+    
+    \item não buscar as informações originais que normalmente se encontram em língua inglesa. Muitos documentos da área foram escritos em inglês e possuem traduções com erros técnicos, por isso é importante buscar os documentos originais e não utilizar traduções de terceiros;
+    
+    \item falta de foco: 
+    % A importância de manter o foco!
+    % Urso na fila de atendimento....
+    \video{https://www.youtube.com/watch?v=6SRTQbBjrFs&list=PL69253D27EBEF273E}{A importância de manter o foco!};
+    
+    \item focar na tarefa e não no resultado:
+    % fazendo trico / cachecol
+    \video{https://www.youtube.com/watch?v=J0iv3TqJBV8&list=PL69253D27EBEF273E}{Foco na Tarefa x Foco no Resultado};
+    
+    \item falta de comprometimento: 
+    \autoref{fig:scrum} e 
+    \citeonline{meligeni_primeiro_treino};
+
+    \item não acreditar no seu potencial: 
+    % Desafio de Gigantes - carregando outro nas costas pelo campo todo...
+    \video{https://www.youtube.com/watch?v=7UnyWuu8HK0&list=PL69253D27EBEF273E}{Trecho do filme Desafiando Gigantes - 2006}
+    e
+    % Rocky Balboa - Motivação Sensacional
+    % Outras versões : 
+    % https://www.youtube.com/watch?v=JeLYCrE5MrI
+    % https://www.youtube.com/watch?v=Rhr6qO7Gmu0
+    \video{https://www.youtube.com/watch?v=Qxsyy5H9JTk&list=PL69253D27EBEF273E}{Trecho do filme Rocky Balboa - 2006};
+    
+    \item medo de sair da zona de conforto:
+    % Até a lagosta sente o desconforto do crescimento
+    \video{https://www.youtube.com/watch?v=F8VBA89qWpc&list=PL69253D27EBEF273E}{Até a lagosta sente o desconforto do crescimento};
+    
+    \item falta de motivação, não encarar os desafios, pode ser falta de um \enquote{tubarão} \cite{tubarao_na_vida} \cite{put_a_shark_in_your_tank} \cite{employees_challenge};
+    
+    \item erro no gerenciamento do tempo e atividades:
+    \begin{itemize}
+        \item \enquote{macacos no ombro}:
+    \waUrl{https://prazercompartilharblog.wordpress.com/2017/09/15/tire-os-macacos-do-meu-ombro/}
+    e
+    % TIRE O MACACO DO OMBRO
+    \video{https://www.youtube.com/watch?v=7alQeDOtiRQ&list=PL69253D27EBEF273E}{TIRE O MACACO DO OMBRO});
+    
+        \item \video{https://www.youtube.com/watch?v=arj7oStGLkU}{Inside the mind of a master procrastinator} \cite{ted_tim_urban_procastinator}.
+    \end{itemize}
+
+    \item deixar para ultima hora o estudo das atividades (latexdiff, statsvn entre outras são ferramentas simples, mas dependem de preparação do ambiente para serem utilizadas);
+
+    \item Não utilizar o conhecimento da equipe para resolver os problemas e fazer as escolhas - \autoref{fig:conhecimento_h2o};
+    
+    \item Não utilizar os recursos e ferramentas existentes da forma correta - \autoref{fig:uso_recursos_escada_1} \autoref{fig:uso_recursos_escada_2};
+
+    \item Não aproveitar os aprendizados de outros alunos que já passaram pelas disciplinas de projetos :
+    \begin{itemize}
+        \item \waUrlTitle{https://glybif.blogspot.com.br/2016/12/como-ir-bem-em-pds.html}{Como ir bem em PDS? - GLYBIF - 2016};
+
+        \item \waUrlTitle{https://glybif.blogspot.com/2020/04/4-anos-depois-de-fazer-pds.html}{4 anos depois de fazer PDS - GLYBIF - 2020};
+
+        \item \waUrlTitle{https://projetothewalkingpet.blogspot.com/2018/12/dificuldades-e-licoes-aprendidas.html}{Dificuldades e lições aprendidas - The WalkingPet - 2018};
+
+        \item \waUrlTitle{https://projetoa6pgpgrupo101010.blogspot.com/2018/12/o-que-nao-fazer-em-a6pgp-para-que-sofrer.html}{O que NÃO fazer em A6PGP: Para quê sofrer? - Blood 4 Pets - 2018};
+        
+        \item \waUrlTitle{https://projetoa6pgpgrupo101010.blogspot.com/2018/12/licoes-aprendidas-durante-o-semestre.html}{Lições aprendidas durante o semestre - Blood 4 Pets - 2018};
+
+        \item \waUrlTitle{https://pgppain.blogspot.com/2019/03/19-coisas-que-voce-precisa-saber-sobre.html}{19 coisas que você precisa saber sobre a Prova de Conceito - PGPPain - 2019};
+
+        \item \waUrlTitle{https://pgppain.blogspot.com/2019/03/nos-estamos-atrasados.html}{Nós estamos atrasados - PGPPain - 2019};
+
+        \item \waUrlTitle{https://ginquestapp.wordpress.com/category/dicas-de-sobrevivencia/}{Dicas de Sobrevivência - GinQuest - 2019}.
+
+    \end{itemize}
+    
+    \item falta de cuidado na comunicação dentro da equipe para garantir o objetivo.
+    
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \caption{Erro na interpretação das mensagens ou falta de atenção}
+	\includegraphics[width=0.95\textwidth]{erros/vendo_bolo_cenoura.jpg}
+	\fonte{Autor desconhecido}
+    \label{fig:vendo_bolo_cenoura}
+\end{figure}
+
+
+
+\begin{figure}
+    \centering
+    \caption{Comprometimento}
+	\includegraphics[width=0.95\textwidth]{erros/060911-scrumtoon.jpg}
+    \fonte{\citeonline{scrum_cartoon}}
+    \label{fig:scrum}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \caption{Utilizar o conhecimento}
+	\includegraphics[width=0.7\textwidth]{erros/conhecimento_h2o.jpg}
+    \fonte{Hussein Awada, -}
+    \label{fig:conhecimento_h2o}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \caption{Saiba utilizar corretamente seus recursos}
+	\includegraphics[width=0.7\textwidth]{erros/uso_de_recursos_escada_1.jpg}
+    \fonte{\citeonline{paulo_maciel_utilizar_recursos}}
+    \label{fig:uso_recursos_escada_1}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \caption{Saiba utilizar corretamente seus recursos - Comparação}
+	\includegraphics[width=0.7\textwidth]{erros/uso_de_recursos_escada_2.jpg}
+    \fonte{\citeonline{paulo_maciel_utilizar_recursos_comparado}}
+    \label{fig:uso_recursos_escada_2}
+\end{figure}
+
+
+
+
+\begin{figure}
+    \centering
+    \caption{Aprenda a lidar com suas falhas}
+	\includegraphics[width=0.7\textwidth]{erros/lidar_com_falhas.jpg}
+    \fonte{\citeonline{paulo_maciel_lidar_com_falhas}}
+    \label{fig:lidar_com_falhas}
+\end{figure}
+

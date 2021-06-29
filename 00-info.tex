@@ -1,0 +1,44 @@
+\newcommand{\urlmodelosimples}{https://www.overleaf.com/project/58a3a66af9bb74023ba1bd56}
+\newcommand{\urlmodelo}{\url{\urlmodelosimples}}
+
+\newcommand{\explicacao}[1]{\todo[nolist,inline,color=yellow]{#1}}
+\newcommand{\explicacaoErro}[1]{\todo[nolist,inline,color=red]{ERRADO: #1}}
+
+% Para facilitar mudanças no site a página 404 tem um redirecionamento pelas chaves
+% utiliza diretamente esse sistema de redirecionamento
+\newcommand{\dicasIvan}[1]{\href{https://dicas.ivanfm.com/404.html?key=#1}{https://dicas.ivanfm.com/#1}}
+
+Esse documento foi feito a partir do modelo canônico do \abnTeX, o acesso ao \acs{pdf} pode ser feito em 
+\urlmodelo. Esse modelo foi feito como exemplo para alunos do \ac{ifsp}.
+\todo[inline]{Remover texto informativo inicial}
+
+Este documento não pode ser considerado como um padrão a ser seguido em sua totalidade, ele tem como maior objetivo demonstrar como utilizar o \LaTeX\ para obter um documento atendendo ao máximo o padrão do \ac{ifsp} e \ac{abnt}.
+
+Faça leitura dos arquivos fonte \LaTeX\ e não somente do \acs{pdf} gerado.
+\todo{Fazer leitura das referências}
+
+Algumas bibliotecas \LaTeX\ disponíveis no overleaf estão desatualizadas, para melhores resultados é recomendável a utilização de outro compilador utilizando as ultimas versões de todas bibliotecas
+
+Leia com cuidado :
+\begin{itemize}
+    \item \dicasIvan{textos};
+    
+    \item exemplos de \LaTeX \space no \autoref{cap-exemplos};
+
+    \item Cuidado para não cometer os erros indicados no \autoref{erros-comuns-capitulo} e \autoref{erros-projetos};
+    
+    \item Revisão de Textos no \autoref{revisao-de-textos};
+
+    \item \autoref{elementos-nao-textuais} sobre elementos não textuais que fala sobre o maior problema dos alunos que é de tentar posicionar as ilustrações.
+\end{itemize}
+
+Um modelo para slides utilizando Beamer : \url{https://www.overleaf.com/read/qjrjhqwqbqqw}
+
+
+Esse modelo ainda utiliza o abntex2cite
+\todo[inline]{migrar do abntex2cite para biblatex-abnt \url{http://www.abntex.net.br/\#abntex3-e-biblatex-abnt}}
+
+
+\noindent\hrulefill
+
+\newpage
