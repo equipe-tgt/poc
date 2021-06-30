@@ -15,6 +15,6 @@
 \vspace {\cftbeforechapterskip }
 \vspace {\cftbeforechapterskip }
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
-\contentsline {chapter}{\MakeTextUppercase {Refer\^encias}}{8}{section*.9}%
-\contentsline {chapter}{GLOSSÁRIO}{8}{section*.9}%
+\contentsline {chapter}{\MakeTextUppercase {Refer\^encias}}{9}{section*.9}%
+\contentsline {chapter}{GLOSSÁRIO}{9}{section*.9}%
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
