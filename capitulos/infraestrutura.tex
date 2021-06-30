@@ -2,13 +2,13 @@
 
 Visando implementar a aplicação conforme descrita no Desenho de
 Porjeto, foi desenvolvida uma infraestrutura usando os serviços
-disponibilizados pela Amazon Web Services.  Mas, num desvio em relação
+disponibilizados pela \gls{aws}.  Mas, num desvio em relação
 aquele documento, a equipe optou por usar a ferramenta Github Actions
-para implementar a pipeline de deploy.  Usando esta pipeline, uma
+para implementar a \gls{pipeline} de \gls{deploy}.  Usando esta \gls{pipeline}, uma
 imagem de Docker é gerada com o executável do aplicativo, isolado em
 um ambiente de execução e com a porta de conexão exposta.
 
-Esta imagem é, então, enviada ao AWS Elastic Container Registry, que
+Esta imagem é, então, enviada ao \gls{aws} Elastic Container Registry, que
 mantém um histótico destas imagens, e a partir deste registry, uma
 tarefa é iniciada e colocada num container, contruídos de modo a
 complementar a imagem (expondo as portas esperadas pela imagem e pela
@@ -17,33 +17,33 @@ automática, tendo politicas de segurança associados a ele.
 
 A partir deste ponto, o container se comunica com duas outras
 ferramentas: um cluster serverless de banco de dados aurora,
-compatível com MySQL 5, no AWS Relational Database Service, serviço
+compatível com MySQL 5, no \gls{aws} Relational Database Service, serviço
 que gerencia as instâncias de banco de dados de forma automática, e
 permite acesso a elas a partir de grupos de segurança
 específicos. Nestes grupos de segurança estão os containers da
-aplicação backend, o que permite a comunicação entre ambas as
+aplicação \gls{backend}, o que permite a comunicação entre ambas as
 aplicações.
 
-No outro lado da aplicação backend, o AWS Elastic Load Balancer
-oferece um ponto de comunicação entre o a rede privada, onde o backend
+No outro lado da aplicação \gls{backend}, o \gls{aws} Elastic Load Balancer
+oferece um ponto de comunicação entre o a rede privada, onde o \gls{backend}
 e o banco de dados se encontram, e a internet externa. Este serviço
-redireciona as requisições HTTPS externas entre todas as instâncias da
+redireciona as requisições \gls{https} externas entre todas as instâncias da
 aplicação que estejam rodando.
 
 Alguns pontos a ser melhor desenvolvidos na infraestrutura são:
 \begin{itemize}
-\item Manter a instâncias da aplicação backend ativas e estáveis por
+\item Manter a instâncias da aplicação \gls{backend} ativas e estáveis por
   um período maior, de modo que pelo menos uma possa responder a
   qualquer momento;
-\item Usar o protocolo HTTPS, como está estabelecido nos requisitos de
+\item Usar o protocolo \gls{https}, como está estabelecido nos requisitos de
   segurança;
-\item Implementar outras pipelines, para escalar a aplicação e
-  realizar o rollback a uma versão anterior;
+\item Implementar outras \glspl{pipeline}, para escalar a aplicação e
+  realizar o \gls{rollback} a uma versão anterior;
 \item Isolar os ambientes de teste e de produção;
 \item Usar o serviço de gerenciamento de segredos para armazenar
-  senhas de banco de dados, e;
-\item Proteger a branch \textt{master} do repositório do Github, para
-  que esta aceite novos commits apenas a partir de Pull Requests, uma
-  vez que um commit novo nesta é o trigger para a execução da pipeline
+  senhas de banco de dados;
+\item Proteger a \gls{branch} master do repositório do Github, para
+  que esta aceite novos \glspl{commit} apenas a partir de Pull Requests, uma
+  vez que um \gls{commit} novo nesta é o trigger para a execução da \gls{pipeline}
   no Github Actions.
 \end{itemize}
